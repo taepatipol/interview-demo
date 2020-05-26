@@ -1,5 +1,8 @@
 import React from 'react'
 import { Layout, Input} from 'antd';
+import store from '../../store';
+import { ADD, EDIT, DELETE} from '../../modules/bookReducer';
+
 const {Content} = Layout;
 
 class Form extends React.Component {
@@ -24,6 +27,7 @@ class Form extends React.Component {
   handleSubmit = (event) => {
     alert('Book submitted ' + this.state.bookName);
     event.preventDefault();
+    store.dispatch(add_book(this.state));
   }
 
   render = () => (
@@ -49,6 +53,30 @@ class Form extends React.Component {
       </Content>
     </Layout>
   );
+}
+
+export const add_book = (bookData) => {
+  return dispatch => {
+    dispatch({
+      type: ADD,
+      data: bookData
+    })
+  }
+}
+
+export const delete_book = (bookId) => {
+  return {
+    type: DELETE,
+    id: bookId
+  }
+}
+
+export const edit_book = (bookId, bookData) => {
+  return {
+    type: EDIT,
+    id: bookId,
+    data: bookData
+  }
 }
 
 export default Form
