@@ -7,7 +7,6 @@ class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: '',
       bookName: '',
       endDate: '',
       writerName: '',
