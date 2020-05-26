@@ -2,12 +2,21 @@ import React from 'react'
 import { Layout} from 'antd';
 import store from '../../store';
 import { connect } from 'react-redux';
+import { handleDeleteBook } from '../form'
 const {Content} = Layout;
 
 class BookList extends React.Component {
 
-  handleDeleteButton = () => {
-    alert('delete')
+  constructor(props) {
+    super(props)
+    this.state = {
+      isEditing: true
+    }
+  }
+
+  handleDeleteButton = (bookId) => {
+    handleDeleteBook(bookId)
+    this.forceUpdate()
   }
 
   handleEditButton = () => {
@@ -17,30 +26,31 @@ class BookList extends React.Component {
   bookInstance = (book) => {
     let bookData = book[1]
     return (
-      <div>
+      <div key={book[0].toString()}>
+        <p>-------</p>
         <p>Book id: {book[0]}</p>
         <p>Book name: {bookData.bookName}</p>
         <p>Finish reading date: {bookData.endDate}</p>
         <p>Writer name: {bookData.writerName}</p>
         <p>Time used: {bookData.timeUsed}</p>
-        <p>Image url: {bookData.imageUrl}</p>
+        <p>Cover image:</p>
+        <img src={bookData.imageUrl}/>
+        <p></p>
         <button type="edit-but" onClick={this.handleEditButton}>Edit</button>
-        <button type="del-but" onClick={this.handleDeleteButton}>Delete</button>
+        <button type="del-but" onClick={() => this.handleDeleteButton(book[0])}>Delete</button>
+        <p>-------</p>
       </div>
     )
   }
-
-
   
   render = () => (
   <Layout className="layout">
     <Content>
       <h1 className="header">Books List</h1>
       <div className="container">
-        <p>
+        <div>
           {this.props.bookData.map(this.bookInstance)}
-        </p>
-
+        </div>
       </div>
     </Content>
   </Layout>

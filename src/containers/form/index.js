@@ -37,15 +37,15 @@ class Form extends React.Component {
         <div className="container">
           <form onSubmit={this.handleSubmit}>
             <p>Book name:</p>
-            <input type="text" name="bookName" onChange={this.handleChange}/>
+            <input type="text" name="bookName" value={this.state.bookName} onChange={this.handleChange}/>
             <p>Finish reading date:</p>
-            <input type="text" name="endDate" onChange={this.handleChange}/>
+            <input type="text" name="endDate" value={this.state.endDate} onChange={this.handleChange}/>
             <p>Writer name:</p>
-            <input type="text" name="writerName" onChange={this.handleChange}/>
+            <input type="text" name="writerName" value={this.state.writerName} onChange={this.handleChange}/>
             <p>Time used:</p>
-            <input type="text" name="timeUsed" onChange={this.handleChange}/>
+            <input type="text" name="timeUsed" value={this.state.timeUsed} onChange={this.handleChange}/>
             <p>Image url:</p>
-            <input type="text" name="imageUrl" onChange={this.handleChange}/>
+            <input type="text" name="imageUrl" value={this.state.imageUrl} onChange={this.handleChange}/>
 
             <input type="submit" value="Submit" />
           </form>
@@ -77,6 +77,11 @@ export const edit_book = (bookId, bookData) => {
     id: bookId,
     data: bookData
   }
+}
+
+export const handleDeleteBook = (bookId) => {
+  alert('delete book id: '+ bookId)
+  store.dispatch(delete_book(bookId))
 }
 
 export default Form

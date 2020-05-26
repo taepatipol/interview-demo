@@ -11,7 +11,7 @@ export default (state = [], action) => {
     case DELETE:
       for (i = 0; i < state.length; i++){
         if (state[i][0] == action.id){
-          state.splice(i)
+          state.splice(i,1)
           return state
         }
       }
