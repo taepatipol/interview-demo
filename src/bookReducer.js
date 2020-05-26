@@ -3,7 +3,7 @@ const DELETE = "DELETE";
 const EDIT = "EDIT";
 let bookId = 0;
 
-bookReducer = (state = [], action) => {
+const bookReducer = (state = [], action) => {
   switch(action.type) {
     case ADD:
       bookId++;
@@ -28,3 +28,24 @@ bookReducer = (state = [], action) => {
   }
 }
 
+const add_book = (bookData) => {
+  return {
+    type: ADD,
+    data: bookData
+  }
+}
+
+const delete_book = (bookId) => {
+  return {
+    type: DELETE,
+    id: bookId
+  }
+}
+
+const edit_book = (bookId, bookData) => {
+  return {
+    type: EDIT,
+    id: bookId,
+    data: bookData
+  }
+}
